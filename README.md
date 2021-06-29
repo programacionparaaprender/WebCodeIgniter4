@@ -61,7 +61,8 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
-
+# guias de instalación
+https://codeigniter4.github.io/userguide/
 https://codeigniter.com/user_guide/installation/installing_composer.html
 
 composer create-project codeigniter4/appstarter project-root
@@ -73,3 +74,10 @@ https://stackoverflow.com/questions/62968301/codeigniter-4-running-error-first-t
 habilitar el env a .env
 y en php.ini
 descomentar ;extension=intl"
+
+# rutas
+http://localhost/WebCodeIgniter4/public/Contacto
+
+
+### modelos
+https://codeigniter4.github.io/userguide/models/model.html
