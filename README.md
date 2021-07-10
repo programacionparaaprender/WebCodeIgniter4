@@ -61,6 +61,10 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
+### cursos
+https://www.udemy.com/course/tutorial-codeigniter-4-de-cero-a-experto/learn/lecture/12501212#overview
+
+
 # guias de instalación
 https://codeigniter4.github.io/userguide/
 https://codeigniter.com/user_guide/installation/installing_composer.html
