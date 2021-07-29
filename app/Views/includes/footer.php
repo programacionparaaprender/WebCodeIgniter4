@@ -7,68 +7,34 @@
 
             <div class="col-seven md-six tab-full popular">
                 <h3>Popular Posts</h3>
-
                 <div class="block-1-2 block-m-full popular__posts">
-                    <article class="col-block popular__post">
-                        <a href="#0" class="popular__thumb">
-                            <img src="<?= base_url() ?>/assets/images/thumbs/small/tulips-150.jpg" alt="">
-                        </a>
-                        <h5>10 Interesting Facts About Caffeine.</h5>
-                        <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                            <span class="popular__date"><span>on</span> <time datetime="2018-06-14">Jun 14, 2018</time></span>
-                        </section>
-                    </article>
-                    <article class="col-block popular__post">
-                        <a href="#0" class="popular__thumb">
-                            <img src="<?= base_url() ?>/assets/images/thumbs/small/wheel-150.jpg" alt="">
-                        </a>
-                        <h5><a href="#0">Visiting Theme Parks Improves Your Health.</a></h5>
-                        <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                            <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12, 2018</time></span>
-                        </section>
-                    </article>
-                    <article class="col-block popular__post">
-                        <a href="#0" class="popular__thumb">
-                            <img src="<?= base_url() ?>/assets/images/thumbs/small/shutterbug-150.jpg" alt="">
-                        </a>
-                        <h5><a href="#0">Key Benefits Of Family Photography.</a></h5>
-                        <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                            <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12, 2018</time></span>
-                        </section>
-                    </article>
-                    <article class="col-block popular__post">
-                        <a href="#0" class="popular__thumb">
-                            <img src="<?= base_url() ?>/assets/images/thumbs/small/cookies-150.jpg" alt="">
-                        </a>
-                        <h5><a href="#0">Absolutely No Sugar Oatmeal Cookies.</a></h5>
-                        <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                            <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12, 2018</time></span>
-                        </section>
-                    </article>
-                    <article class="col-block popular__post">
-                        <a href="#0" class="popular__thumb">
-                            <img src="<?= base_url() ?>/assets/images/thumbs/small/beetle-150.jpg" alt="">
-                        </a>
-                        <h5><a href="#0">Throwback To The Good Old Days.</a></h5>
-                        <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                            <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12, 2018</time></span>
-                        </section>
-                    </article>
-                    <article class="col-block popular__post">
-                        <a href="#0" class="popular__thumb">
-                            <img src="<?= base_url() ?>/assets/images/thumbs/small/salad-150.jpg" alt="">
-                        </a>
-                        <h5>Healthy Mediterranean Salad Recipes</h5>
-                        <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                            <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12, 2018</time></span>
-                        </section>
-                    </article>
+
+                <?php
+                        $db = \Config\Database::connect();
+                        $query = $db->query("select * from posts where show_home=1");
+                        $result = $query->getResult();
+                        foreach($result as $p){
+                            $url = base_url() ;
+                            //echo '<li><a href="'.base_url().'/Category/'.$r->id.'">'.$r->name.'</a></li>';
+                            echo '<article class="col-block popular__post">';
+                            echo '<a href='.$url.'/public/Posts/'.$p->id.'" class="popular__thumb">';
+                            
+                            echo '<img src="'.$url.'/public/uploads/'.$p->banner.'" alt="">';
+                            echo '</a>';
+                            echo '<h5>'.$p->title.'.</h5>';
+                            echo '<section class="popular__meta">';
+                            echo '<span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>';
+                            echo '<span class="popular__date"><span>on</span> <time datetime="'.$p->created_at.'">'.date('d-m-Y',strtotime($p->created_at)).'</time></span>';
+                            echo '</section>';
+                            echo '</article>';
+                ?>
+
+
+                <?php
+                        }
+                ?>
+                </div>
+
                 </div> <!-- end popular_posts -->
             </div> <!-- end popular -->
 
@@ -78,12 +44,14 @@
                         <h3>Categories</h3>
         
                         <ul class="linklist">
-                            <li><a href="#0">Lifestyle</a></li>
-                            <li><a href="#0">Travel</a></li>
-                            <li><a href="#0">Recipes</a></li>
-                            <li><a href="#0">Management</a></li>
-                            <li><a href="#0">Health</a></li>
-                            <li><a href="#0">Creativity</a></li>
+                            <?php
+                            $db = \Config\Database::connect();
+                            $query = $db->query("select * from categories");
+                            $result = $query->getResult();
+                            foreach($result as $r){
+                                echo '<li><a href="'.base_url().'/Category/'.$r->id.'">'.$r->name.'</a></li>';
+                            }
+                            ?>
                         </ul>
                     </div> <!-- end categories -->
         
@@ -91,12 +59,8 @@
                         <h3>Site Links</h3>
         
                         <ul class="linklist">
-                            <li><a href="#0">Home</a></li>
-                            <li><a href="#0">Blog</a></li>
-                            <li><a href="#0">Styles</a></li>
-                            <li><a href="#0">About</a></li>
-                            <li><a href="#0">Contact</a></li>
-                            <li><a href="#0">Privacy Policy</a></li>
+                            <li><a href="<?= base_url() ?>/public/Home">Home</a></li>
+                            <li><a href="<?= base_url() ?>/public/Home">Blog</a></li>
                         </ul>
                     </div> <!-- end sitelinks -->
                 </div>
@@ -130,13 +94,32 @@
                     <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et enim exercitationem ipsam. Culpa consequatur occaecati.</p>
 
                     <div class="subscribe-form">
-                        <form id="mc-form" class="group" novalidate="true">
+                        <form 
+                            action="<?= base_url() ?>/public/Home/add_newsletter" 
+                            id="mc-form" 
+                            class="group" 
+                            method="post"
+                            novalidate="true">
+                            <input 
+                                type="email" 
+                                value="" 
+                                name="email" 
+                                class="email" 
+                                id="mc-email" 
+                                placeholder="Email Address" 
+                                required="">
+                
+                            <input 
+                                type="submit" 
+                                name="subscribe" 
+                                value="Send">
+                            <!-- <input 
+                                type="reset" 
+                                name="cleaner" 
+                                value="Reset"> -->
+                            <label for="mc-email" class="subscribe-message">
 
-                            <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
-                
-                            <input type="submit" name="subscribe" value="Send">
-                
-                            <label for="mc-email" class="subscribe-message"></label>
+                            </label>
                 
                         </form>
                     </div>
@@ -188,11 +171,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer> <!-- end s-footer -->
 
 
-    <!-- Java Script
-    ================================================== -->
-    <script src="<?= base_url() ?>/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="<?= base_url() ?>/assets/js/plugins.js"></script>
-    <script src="<?= base_url() ?>/assets/js/main.js"></script>
+
 
 </body>
 

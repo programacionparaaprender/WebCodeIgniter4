@@ -28,6 +28,25 @@
     <link rel="shortcut icon" href="<?= base_url() ?>/assets/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?= base_url() ?>/assets/favicon.ico" type="image/x-icon">
 
+<!-- Java Script
+    ================================================== -->
+    <script src="<?= base_url() ?>/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="<?= base_url() ?>/assets/js/plugins.js"></script>
+    <script src="<?= base_url() ?>/assets/js/main.js"></script>
+    
+    <!-- summer note -->
+
+<!-- include libraries(jQuery, bootstrap) -->
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
+    
+
 </head>
 
 <body id="top">
@@ -78,25 +97,19 @@
                 <li class="has-children">
                     <a href="#0" title="">Categories</a>
                     <ul class="sub-menu">
-                        <li><a href="category.html">Lifestyle</a></li>
-                        <li><a href="category.html">Health</a></li>
-                        <li><a href="category.html">Family</a></li>
-                        <li><a href="category.html">Management</a></li>
-                        <li><a href="category.html">Travel</a></li>
-                        <li><a href="category.html">Work</a></li>
+                        <?php
+                        $db = \Config\Database::connect();
+                        $query = $db->query("select * from categories");
+                        $result = $query->getResult();
+                        foreach($result as $r){
+                            echo '<li><a href="'.base_url().'/Category/'.$r->id.'">'.$r->name.'</a></li>';
+                        }
+                        ?>
                     </ul>
                 </li>
-                <li class="has-children">
-                    <a href="#0" title="">Blog</a>
-                    <ul class="sub-menu">
-                        <li><a href="single-video.html">Video Post</a></li>
-                        <li><a href="single-audio.html">Audio Post</a></li>
-                        <li><a href="single-standard.html">Standard Post</a></li>
-                    </ul>
+                <li>
+                    <a href="<?= base_url() ?>/public/Home" title="">Blog</a>
                 </li>
-                <li><a href="style-guide.html" title="">Styles</a></li>
-                <li><a href="page-about.html" title="">About</a></li>
-                <li><a href="page-contact.html" title="">Contact</a></li>
             </ul> <!-- end header__nav -->
 
             <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

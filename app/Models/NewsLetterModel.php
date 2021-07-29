@@ -2,8 +2,8 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class CategoriesModel extends Model{
-    protected $table      = 'categories';
+class NewsLetterModel extends Model{
+    protected $table      = 'newsletter';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
@@ -12,7 +12,7 @@ class CategoriesModel extends Model{
     //comentar por que da error
     //protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['name','deleted'];
+    protected $allowedFields = ['email', 'added_at'];
 
 }
 ?>

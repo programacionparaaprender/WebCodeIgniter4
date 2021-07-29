@@ -85,3 +85,14 @@ http://localhost/WebCodeIgniter4/public/Contacto
 
 ### modelos
 https://codeigniter4.github.io/userguide/models/model.html
+
+
+### errores en los modelos
+comentar por que da error
+protected $useSoftDeletes = true;
+
+### migraciones
+https://www.twilio.com/blog/create-secured-restful-api-codeigniter-php
+
+###
+https://summernote.org/
