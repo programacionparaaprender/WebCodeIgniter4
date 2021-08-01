@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2021 a las 02:41:25
+-- Tiempo de generación: 02-08-2021 a las 00:09:53
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.32
 
@@ -53,6 +53,18 @@ CREATE TABLE `newsletter` (
   `deleted` int(11) NOT NULL,
   `added_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `newsletter`
+--
+
+INSERT INTO `newsletter` (`id`, `email`, `deleted`, `added_at`) VALUES
+(1, 'yancel209@gmail.com', 0, '0000-00-00'),
+(2, 'alberto13711@gmail.com', 0, '0000-00-00'),
+(3, '[object HTMLInputElement]', 0, '0000-00-00'),
+(4, 'luis13711@hotmail.com', 0, '0000-00-00'),
+(5, 'ejemplo@gmail.com', 0, '0000-00-00'),
+(6, 'libreriaomega3@gmail.com', 0, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -141,7 +153,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `posts`
