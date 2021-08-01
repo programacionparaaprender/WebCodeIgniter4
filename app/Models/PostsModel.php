@@ -9,7 +9,7 @@ class PostsModel extends Model{
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
-    protected $useSoftDeletes = true;
+    //protected $useSoftDeletes = true;
 
     protected $allowedFields = ['banner', 'title', 'content', 'intro', 'category','tags','created_at','created_by','deleted'];
 

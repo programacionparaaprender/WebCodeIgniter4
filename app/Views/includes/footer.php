@@ -94,8 +94,41 @@
                     <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et enim exercitationem ipsam. Culpa consequatur occaecati.</p>
 
                     <div class="subscribe-form">
-                        <form 
-                            action="<?= base_url() ?>/public/Home/add_newsletter" 
+                    <form 
+                            
+                            id="mc-form" 
+                            class="group" 
+                            method="post"
+                            novalidate="true">
+                            <input 
+                                type="email" 
+                                value="" 
+                                name="email" 
+                                class="email" 
+                                id="mc-email" 
+                                placeholder="Email Address" 
+                                required="">
+                
+                            <button 
+                                onclick="fSend()"
+                                type="button" 
+                                name="subscribe">
+                                Send
+                            </button>
+                            <!-- <input 
+                                type="reset" 
+                                name="cleaner" 
+                                value="Reset"> -->
+                            <label 
+                                for="mc-email" 
+                                class="subscribe-message" 
+                                style="color:white;font-zise:25pt;">
+
+                            </label>
+                
+                        </form>
+                        <!-- <form 
+                            action="colocarcodeigniter/public/Home/add_newsletter" 
                             id="mc-form" 
                             class="group" 
                             method="post"
@@ -113,15 +146,13 @@
                                 type="submit" 
                                 name="subscribe" 
                                 value="Send">
-                            <!-- <input 
-                                type="reset" 
-                                name="cleaner" 
-                                value="Reset"> -->
-                            <label for="mc-email" class="subscribe-message">
+                                 <label for="mc-email" class="subscribe-message">
 
                             </label>
                 
-                        </form>
+                        </form> 
+                             -->
+                           
                     </div>
 
                 </div> <!-- end s-footer__subscribe -->
@@ -170,7 +201,101 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     </footer> <!-- end s-footer -->
 
-
+    <script type="text/javascript">
+    async function postData(url = '', data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+    }
+    async function postData2(url = '', data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        return response; // parses JSON response into native JavaScript objects
+    }
+    async function fSend() {
+        try{
+            var mail = document.getElementById("mc-email");
+            var postData = new FormData();
+            postData.append('email', mail.value);
+            const response = await axios.post("<?= base_url() ?>/public/Home/add_newsletter2",postData);
+            console.log(response);
+            var x = document.getElementsByClassName("subscribe-message")[0];
+            if(response.status == 200){
+                x.innerText = response.data;
+            }
+            
+        }catch(error){
+            console.log(error)
+        }
+    }
+       
+    function fSendAntiguo2(){
+            //console.log("Se ha enviado correo");
+            var mail = document.getElementById("mc-email");
+            //const mail = document.querySelector('#mc-email'); 
+            postData2("<?= base_url() ?>/public/Home/add_newsletter2",{
+                email: mail.value
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                var x = document.getElementsByClassName("subscribe-message");
+                x.value = data;
+            }).catch(err => {
+                console.log(err);
+                // code to handle request errors
+            });
+            
+        }
+       function fSendAntiguo(){
+            //console.log("Se ha enviado correo");
+            //var mail = document.getElementById("mc-email");
+            const mail = document.querySelector('#mc-email'); 
+            fetch("<?= base_url() ?>/public/Home/add_newsletter2",{
+                email: mail.value
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                var x = document.getElementsByClassName("subscribe-message");
+                x.value = data;
+            }).catch(err => {
+                console.log(err);
+                // code to handle request errors
+            });
+            /* $.post("codeigniterurl/public/Home/add_newsletter2",{
+                email: email.value
+            }).done(function(data){
+                var x = document.getElementsByClassName("subscribe-message");
+                x.value = data;
+            }); */
+            
+        }
+    </script>
 
 
 </body>

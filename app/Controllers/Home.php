@@ -30,12 +30,50 @@ class Home extends BaseController
 		//$this->loadViews("index");
 	}
 
-	public function add_newsletter(){
-		if($_POST['email']){
-			$newslettermodel = new NewsLetterModel();
-			$newslettermodel->insert($_POST);
+	public function post($id=null){
+		if($id){
+			$postmodel = new PostsModel();
+			$categorymodel = new CategoriesModel();
+			$post=$postmodel->where("id", $id)->findAll();
+			$category = $categorymodel->where("id", $post[0]['category'])->findAll();	
+			$data['post'] = $post;
+			$data['category'] = $category;	
+			return view("post", $data);
 		}
 		return view("index");
+	}
+
+	public function add_newsletter2(){
+		$id = 0;
+		$data['mensaje'] = "no fue enviado el correo";
+		 
+		if($_POST['email']){
+			$newslettermodel = new NewsLetterModel();
+			
+			$emails=$newslettermodel->where("email", $_POST['email'])->findAll();
+			
+			if(isset($emails)){
+				return "El correo ya esta registrado.";
+			}else{
+				$id = $newslettermodel->insert($_POST);
+				$data['mensaje'] = "Su correo se ha enviado.";
+				return "Su correo se ha enviado.";
+			}
+
+			
+		}
+		return "no fue enviado el correo";
+	}
+	public function add_newsletter(){
+		$id = 0;
+		$data['mensaje'] = "no fue enviado el correo";
+		if($_POST['email']){
+			$newslettermodel = new NewsLetterModel();
+			$id = $newslettermodel->insert($_POST);
+			$data['mensaje'] = "Su correo se ha enviado.";
+		}
+		$data['id'] = $id;
+		return view("index", $data);
 	}
 
 	public function uploadPost(){
